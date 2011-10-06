@@ -2,7 +2,11 @@
 
 import logging
 import math
-import simplejson as json
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 _log = logging.getLogger("instatrace")
 
