@@ -12,7 +12,7 @@ setup(
     author_email = "peter@teichman.org",
     url = "http://wiki.github.com/pteichman/instatrace/",
     description = "Software statistics recorder/display",
-    packages = ["instatrace"],
+    packages = ["instatrace", "instatrace.reporters"],
     test_suite = "tests",
     install_requires = ["argparse>=1.1"],
     classifiers = [
