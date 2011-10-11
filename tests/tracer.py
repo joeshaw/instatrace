@@ -78,7 +78,7 @@ class TracerTests(unittest.TestCase):
 
         with self.trace_context(reporter):
             start = tracer.now_ms()
-            with tracer.trace_ms(stat):
+            with tracer.trace_ms([stat]):
                 pass
             end = tracer.now_ms()
             self.assert_last_value_less_than(reporter, stat, end - start,

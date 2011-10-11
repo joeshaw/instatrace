@@ -2,6 +2,7 @@
 # Copyright (c) 2011 litl, LLC
 
 import time
+import types
 
 from contextlib import contextmanager
 
@@ -29,18 +30,26 @@ class Tracer(object):
             reporter.trace(stat, value, user_data)
 
     @contextmanager
-    def trace_us(self, stat, user_data=None):
+    def trace_us(self, stats, user_data=None):
+        if not type(stats) in (types.ListType, types.TupleType):
+            stats = [stats]
         start = self.now_us()
         yield
         end = self.now_us()
-        self.trace(stat, end - start, user_data)
+        diff = end - start
+        for stat in stats:
+            self.trace(stat, diff, user_data)
 
     @contextmanager
-    def trace_ms(self, stat, user_data=None):
+    def trace_ms(self, stats, user_data=None):
+        if not type(stats) in (types.ListType, types.TupleType):
+            stats = [stats]
         start = self.now_ms()
         yield
         end = self.now_ms()
-        self.trace(stat, end - start, user_data)
+        diff = end - start
+        for stat in stats:
+            self.trace(stat, diff, user_data)
 
     def close(self):
         for reporter in self.reporters:
